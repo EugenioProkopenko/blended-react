@@ -20,3 +20,20 @@
 
 // toUserObjects(users);
 // // Повертає: [{ id: 1, name: "alice" }, { id: 2, name: "bob" }, { id: 3, name: "charlie" }]
+
+interface Users {
+  id: number;
+  name: string;
+}
+
+const users: string[] = ['alice', 'bob', 'charlie'];
+
+function toUserObjects(arr: string[]) {
+  return arr.map((item, index) => ({
+    id: index + 1,
+    name: item,
+  }));
+}
+
+const result = toUserObjects(users);
+console.log(result);

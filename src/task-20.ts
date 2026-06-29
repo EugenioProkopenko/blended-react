@@ -2,7 +2,7 @@
 
 // Функція fetchPosts повинна отримати список постів з API за допомогою бібліотеки axios.
 
-import axios from 'axios';
+// import axios from 'axios';
 
 // const fetchPosts = async () => {
 //   const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
@@ -13,11 +13,36 @@ import axios from 'axios';
 
 // Оголосіть інтерфейс Post для поста (перевірте, які властивості користувача містяться у відповіді бекенда).
 // Типізуйте функцію fetchPosts, вказавши, що вона повертає проміс, який містить масив об'єктів типу Post.
-// Оголосіть функцію logThreePosts, яка виведе в консоль дані перших 3 постів, виводячи їхні title та bodimport axios from "axios";
+// Оголосіть функцію logThreePosts, яка виведе в консоль дані перших 3 постів, виводячи їхні title та bodi mport axios from "axios";
 
-const fetchPosts = async () => {
-  const response = await axios.get(
+// const fetchPosts = async () => {
+//   const response = await axios.get(
+//     'https://jsonplaceholder.typicode.com/posts'
+//   );
+//   return response.data;
+// };
+import axios from 'axios';
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+const fetchPosts = async (): Promise<Post[]> => {
+  const response = await axios.get<Post[]>(
     'https://jsonplaceholder.typicode.com/posts'
   );
   return response.data;
 };
+
+async function getUserName(): Promise<void> {
+  const posts = await fetchPosts();
+  posts
+    .slice(0, 3)
+    .forEach((data, index) =>
+      console.log(`${index + 1}Title: ${data.title}, Body: ${data.body}`)
+    );
+}
+getUserName();
